@@ -1,7 +1,7 @@
+import Keyboard from "./Keyboard";
 
-
-function EditArea() {
-    return <></>
+function EditArea(props) {
+    return <Keyboard onKeyEvent={(val) => props.onKeyEvent(val)} />
 }
 
 export default EditArea;
