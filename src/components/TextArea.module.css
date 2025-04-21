@@ -1,0 +1,7 @@
+.textarea {
+    width: 90%;
+    height: 200px;
+    background: white;
+    color: black;
+    white-space: pre-wrap;
+}

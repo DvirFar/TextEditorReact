@@ -1,10 +1,10 @@
 class KeyClass {
     static id = 0;
 
-    constructor(value, /*isSpecial = false*/) {
+    constructor(value, isSpecial = false) {
         this.id = KeyClass.id++;
         this.value = value;
-        //this.isSpecial = isSpecial;
+        this.isSpecial = isSpecial;
     }
 
     getDisplayValue() {
