@@ -6,16 +6,16 @@ import styles from "./Keyboard.module.css"
 function Keyboard(props) {
 
     const handleKeyEvent = (key) => {
-        if (key.isSpecial) {
-            console.log(`Special key pressed: ${key.value}`);
-            handleSpecialKeys(key.value);
+        if (key.isWhiteSpace) {
+            console.log(`White Space pressed: ${key.value}`);
+            handleWhiteSpace(key.value);
         } else {
             console.log(`Key pressed: ${key.value}`);
             props.onKeyEvent(key.value);
         }
     };
 
-    const handleSpecialKeys = (value) => {
+    const handleWhiteSpace = (value) => {
         switch (value) {
             case 'Enter': { props.onKeyEvent("\n"); break; }
             case 'Tab': { props.onKeyEvent("\t"); break; }
@@ -30,7 +30,7 @@ function Keyboard(props) {
                     {row.map((keyClass) => (
                         <Key
                             key={keyClass.id}
-                            val={keyClass.getDisplayValue()}
+                            val={keyClass.value}
                             onKeyEvent={() => handleKeyEvent(keyClass)}
                         />
                     ))}
