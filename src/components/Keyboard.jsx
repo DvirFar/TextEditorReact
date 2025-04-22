@@ -23,6 +23,23 @@ function Keyboard(props) {
         }
     }
 
+    let keyWidth;
+
+    switch (props.type) {
+        case "Emojis": {
+            keyWidth = "0.6em";
+            break;
+        }
+        case "SpecialChars": {
+            keyWidth = "0.9em";
+            break;
+        }
+        default: {
+            keyWidth = "0.8em";
+            break;
+        }
+    };
+
     return (
         <div className={styles.keyboard}>
             {getKeyboardLayout(props.type).map((row, rowIndex) => (
@@ -32,6 +49,7 @@ function Keyboard(props) {
                             key={keyClass.id}
                             val={keyClass.value}
                             onKeyEvent={() => handleKeyEvent(keyClass)}
+                            keyWidth={keyWidth}
                         />
                     ))}
                 </div>

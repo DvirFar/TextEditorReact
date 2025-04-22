@@ -6,14 +6,10 @@ import './App.css'
 function App() {
   const [text, setText] = useState('')
 
-  function handleClick(value) {
-    setText(text + value);
-  }
-
   return (
     <>
       <TextArea text={text} />
-      <EditArea onKeyEvent={(val) => handleClick(val)} />
+      <EditArea text={text} setText={(val) => setText(val)} />
     </>
   )
 }

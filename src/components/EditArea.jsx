@@ -4,11 +4,11 @@ import SpecialEditsArea from "./SpecialEditsArea";
 
 function EditArea(props) {
 
-    return <>
+    return <div className="edit-area" style={{"display":"flex", "flexDirection":"row"}}>
         <StyleArea />
-        <KeyboardArea onKeyEvent={(val) => props.onKeyEvent(val)} />
-        <SpecialEditsArea />
-    </>
+        <KeyboardArea onKeyEvent={(val) => props.setText(props.text + val)} />
+        <SpecialEditsArea text={props.text} setText={(newText) => props.setText(newText)} />
+    </div>
 }
 
 export default EditArea;

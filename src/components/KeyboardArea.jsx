@@ -8,7 +8,7 @@ function KeyboardArea(props) {
         setKeyboard(keyboard);
     }
 
-    return <div className="keyboard-area">
+    return <div className="keyboard-area" style={{"flexGrow":2}}>
         <Keyboard type={keyboard} onKeyEvent={(val) => props.onKeyEvent(val)} />
         <div className="keyboard-type">
             <button onClick={() => handleKeyBoardChange("EnglishCap")}>English - Capital</button>
