@@ -1,6 +1,7 @@
 import Key from "./Key";
 import { getKeyboardLayout } from "../utils/models/keyboardTypes";
 import KeyClass from "../utils/models/KeyClass";
+import styles from "./Keyboard.module.css"
 
 function Keyboard(props) {
 
@@ -23,7 +24,7 @@ function Keyboard(props) {
     }
 
     return (
-        <div className="keyboard">
+        <div className={styles.keyboard}>
             {getKeyboardLayout(props.type).map((row, rowIndex) => (
                 <div key={rowIndex} className="keys-row">
                     {row.map((keyClass) => (

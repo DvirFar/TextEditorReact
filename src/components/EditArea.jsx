@@ -16,6 +16,7 @@ function EditArea(props) {
             <button onClick={() => handleKeyBoardChange("Hebrew")}>Hebrew</button>
             <button onClick={() => handleKeyBoardChange("Digits")}>Digits</button>
             <button onClick={() => handleKeyBoardChange("SpecialChars")}>Special Characters</button>
+            <button onClick={() => handleKeyBoardChange("Emojis")}>Emojis</button>
         </div>
     </>
 }

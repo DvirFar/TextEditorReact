@@ -26,8 +26,38 @@ const keyboardLayouts = {
         ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*'],
         ['(', ')', '[', ']', '{', '}', '\\', '|', '\'', '"'],
         [';', ':', '<', '>', '/', '.', '?', '-', '_', '=', '+']
-    ]
+    ],
+    Emojis: generateEmojiLayout()
 };
+
+function generateEmojiLayout() {
+    const emojis = [];
+    const ranges = [
+        [0x1F600, 0x1F64F], // Emoticons
+        [0x1F300, 0x1F5FF], // Miscellaneous Symbols and Pictographs
+        [0x1F680, 0x1F6FF], // Transport and Map Symbols
+        [0x1F700, 0x1F77F], // Alchemical Symbols
+        [0x1F900, 0x1F9FF], // Supplemental Symbols and Pictographs
+        [0x1FA70, 0x1FAFF], // Symbols and Pictographs Extended-A
+        [0x2600, 0x26FF],   // Miscellaneous Symbols
+        [0x2700, 0x27BF]    // Dingbats
+    ];
+
+    let row = [];
+    for (const [start, end] of ranges) {
+        for (let code = start; code <= end; code++) {
+            row.push(String.fromCodePoint(code));
+            if (row.length === 10) { // Create rows of 10 emojis
+                emojis.push(row);
+                row = [];
+            }
+        }
+    }
+    if (row.length > 0) {
+        emojis.push(row); // Add the remaining emojis
+    }
+    return emojis;
+}
 
 export function getKeyboardLayout(type) {
     return keyboardLayouts[type].map(row => row.map(key => new KeyClass(key)));
