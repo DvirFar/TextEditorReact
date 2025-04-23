@@ -7,7 +7,7 @@ function SpecialEditsArea(props) {
     return <div className="specials">
         <DeleteArea text={props.text} setText={props.setText} />
         <SearchArea />
-        <ReplaceArea />
+        <ReplaceArea text={props.text} setText={props.setText} />
         <UndoArea />
     </div>
 }

@@ -1,0 +1,45 @@
+.replaceArea input[type="text"] {
+    width: 22%;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.5%;
+    margin: 8px;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.87);
+    transition: border-color 0.25s;
+}
+
+.replaceArea input[type="text"]:hover {
+    border-color: #646cff;
+}
+
+.replaceArea input[type="text"]:focus,
+.replaceArea input[type="text"]:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+.replaceArea input[type="submit"] {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.5%;
+    margin: 8px;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.87);
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+.replaceArea input[type="submit"]:hover {
+    border-color: #646cff;
+}
+
+.replaceArea input[type="submit"]:focus,
+.replaceArea input[type="submit"]:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
