@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import TextArea from './components/TextArea'
-import EditArea from './components/EditArea'
+import TextArea from './components/main_components/TextArea'
+import EditArea from './components/main_components/EditArea'
 import './App.css'
 
 function App() {

@@ -1,7 +1,7 @@
-import StyleArea from "./StyleArea";
-import KeyboardArea from "./KeyboardArea";
-import SpecialEditsArea from "./SpecialEditsArea";
-import UndoArea from "./UndoArea";
+import StyleArea from "../edit_components/StyleArea";
+import KeyboardArea from "../edit_components/KeyboardArea";
+import SpecialEditsArea from "../edit_components/SpecialEditsArea";
+import UndoArea from "../edit_components/UndoArea";
 import { useState } from "react";
 
 function EditArea(props) {
