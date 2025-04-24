@@ -6,4 +6,9 @@
     white-space: pre-wrap;
     margin: auto;
     margin-bottom: 20px;
+    padding: 20px;
+    text-align: left;
+    overflow: auto;
+    border-radius: 5px;
+    box-sizing: border-box;
 }

@@ -6,16 +6,15 @@ import './App.css'
 
 function App() {
   const [text, setText] = useState('')
-  const [formattedSegments, setFormattedSegments] = useState([])
 
   const handleTextChange = (val) => {
-    setText(text + val);
+    setText(prevText => prevText + val);
   }
 
   return (
     <TextFormatterProvider>
       <div className="app-container">
-        <TextArea text={text} formattedSegments={formattedSegments} />
+        <TextArea text={text} />
         <EditArea 
           text={text} 
           setText={setText} 

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 // Create a context for text formatting
 export const FormattingContext = createContext();
@@ -13,35 +13,44 @@ export function TextFormatterProvider({ children }) {
         bold: false,
         italic: false,
         underline: false,
-        fontSize: 'medium', // small, medium, large
+        fontSize: 'medium',
         fontFamily: 'default',
         color: 'black',
         alignment: 'left'
     });
 
-    // Function to toggle a formatting option
+    // Simplified toggle function focusing specifically on formatting options
     const toggleFormat = (formatType) => {
         if (['bold', 'italic', 'underline'].includes(formatType)) {
-            setFormatting(prev => ({
-                ...prev,
-                [formatType]: !prev[formatType]
-            }));
-        } else if (['small', 'medium', 'large'].includes(formatType)) {
+            // For the troublesome formatting options, use a more explicit approach
+            setFormatting(prevState => {
+                const newValue = !prevState[formatType];
+                alert(`Changing ${formatType} from ${prevState[formatType]} to ${newValue}`);
+                return {
+                    ...prevState,
+                    [formatType]: newValue
+                };
+            });
+        } 
+        else if (['small', 'medium', 'large'].includes(formatType)) {
             setFormatting(prev => ({
                 ...prev,
                 fontSize: formatType
             }));
-        } else if (['default', 'serif', 'sans-serif', 'monospace', 'cursive'].includes(formatType)) {
+        } 
+        else if (['default', 'serif', 'sans-serif', 'monospace', 'cursive'].includes(formatType)) {
             setFormatting(prev => ({
                 ...prev,
                 fontFamily: formatType
             }));
-        } else if (['black', 'red', 'blue', 'green'].includes(formatType)) {
+        } 
+        else if (['black', 'red', 'blue', 'green'].includes(formatType)) {
             setFormatting(prev => ({
                 ...prev,
                 color: formatType
             }));
-        } else if (['left', 'center', 'right'].includes(formatType)) {
+        } 
+        else if (['left', 'center', 'right'].includes(formatType)) {
             setFormatting(prev => ({
                 ...prev,
                 alignment: formatType
@@ -49,23 +58,8 @@ export function TextFormatterProvider({ children }) {
         }
     };
 
-    // Function to apply formatting to text
-    const formatText = (text) => {
-        return {
-            text,
-            formatting: { ...formatting }
-        };
-    };
-
-    // Provide context values
-    const contextValue = {
-        formatting,
-        toggleFormat,
-        formatText
-    };
-
     return (
-        <FormattingContext.Provider value={contextValue}>
+        <FormattingContext.Provider value={{ formatting, toggleFormat }}>
             {children}
         </FormattingContext.Provider>
     );
