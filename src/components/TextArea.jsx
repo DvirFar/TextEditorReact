@@ -1,9 +1,23 @@
-import styles from './TextArea.module.css';
+import StyleArea from "./StyleArea";
+import KeyboardArea from "./KeyboardArea";
+import SpecialEditsArea from "./SpecialEditsArea";
+import { useFormatting } from "./TextFormatter";
 
-function TextArea(props) {
-    return <div className={styles.textarea}>
-        {props.text}
-    </div>
+function EditArea(props) {
+    const { toggleFormat } = useFormatting();
+
+    const handleStyleChange = (styleType) => {
+        toggleFormat(styleType);
+        if (props.onStyleApply) {
+            props.onStyleApply(styleType);
+        }
+    };
+
+    return <>
+        <StyleArea onStyleChange={handleStyleChange} />
+        <KeyboardArea onKeyEvent={(val) => props.onKeyEvent(val)} />
+        <SpecialEditsArea />
+    </>
 }
 
-export default TextArea;
+export default EditArea;
