@@ -1,6 +1,6 @@
-import Key from "./Key";
-import { getKeyboardLayout } from "../utils/models/keyboardTypes";
-import KeyClass from "../utils/models/KeyClass";
+import Key from "../../utils/primitives/Key";
+import { getKeyboardLayout } from "../../utils/primitives/keyboardTypes";
+import KeyClass from "../../utils/primitives/KeyClass";
 import styles from "./Keyboard.module.css"
 
 function Keyboard(props) {
@@ -23,6 +23,23 @@ function Keyboard(props) {
         }
     }
 
+    let keyWidth;
+
+    switch (props.type) {
+        case "Emojis": {
+            keyWidth = "0.6em";
+            break;
+        }
+        case "SpecialChars": {
+            keyWidth = "0.9em";
+            break;
+        }
+        default: {
+            keyWidth = "0.8em";
+            break;
+        }
+    };
+
     return (
         <div className={styles.keyboard}>
             {getKeyboardLayout(props.type).map((row, rowIndex) => (
@@ -32,6 +49,7 @@ function Keyboard(props) {
                             key={keyClass.id}
                             val={keyClass.value}
                             onKeyEvent={() => handleKeyEvent(keyClass)}
+                            keyWidth={keyWidth}
                         />
                     ))}
                 </div>

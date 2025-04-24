@@ -1,18 +1,20 @@
 import { useState } from 'react'
+<<<<<<< HEAD
 import TextArea from './components/TextArea'
 import EditArea from './components/EditArea'
 import { TextFormatterProvider } from './components/TextFormatter'
+=======
+import TextArea from './components/main_components/TextArea'
+import EditArea from './components/main_components/EditArea'
+>>>>>>> ca05ae0b9b96d1d88296e18ae3044fc223fd65a3
 import './App.css'
 
 function App() {
   const [text, setText] = useState('')
   const [formattedSegments, setFormattedSegments] = useState([])
 
-  function handleClick(value) {
-    setText(text + value);
-  }
-
   return (
+<<<<<<< HEAD
     <TextFormatterProvider>
       <TextArea text={text} formattedSegments={formattedSegments} />
       <EditArea 
@@ -24,6 +26,12 @@ function App() {
         }} 
       />
     </TextFormatterProvider>
+=======
+    <>
+      <TextArea text={text} />
+      <EditArea text={text} setText={(val) => setText(val)} />
+    </>
+>>>>>>> ca05ae0b9b96d1d88296e18ae3044fc223fd65a3
   )
 }
 
