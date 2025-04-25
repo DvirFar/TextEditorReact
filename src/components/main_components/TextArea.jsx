@@ -7,6 +7,13 @@ function TextArea({ text, formatting }) {
       {text ? (
         // Apply formatting only to actual text
         <div style={{
+  return (<div>
+      <div className='fileName'>
+        
+      </div>
+      <div 
+        className={styles.textarea} 
+        style={{
           fontWeight: formatting.bold ? 'bold' : 'normal',
           fontStyle: formatting.italic ? 'italic' : 'normal',
           textDecoration: formatting.underline ? 'underline' : 'none',
@@ -38,6 +45,16 @@ function TextArea({ text, formatting }) {
           Type something...
         </div>
       )}
+        }}
+      >
+        {/* Include debugging information in the text area */}
+        <div style={{color: 'gray', fontSize: '0.8em', marginBottom: '10px', fontWeight: 'normal', fontStyle: 'normal', textDecoration: 'none'}}>
+          Bold: {formatting.bold ? 'ON' : 'OFF'}, 
+          Italic: {formatting.italic ? 'ON' : 'OFF'}, 
+          Underline: {formatting.underline ? 'ON' : 'OFF'}
+        </div>
+        {text || "Type something..."}
+      </div>
     </div>
   );
 }
