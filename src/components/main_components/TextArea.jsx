@@ -1,4 +1,4 @@
-import { useFormatting } from '../TextFormatter'
+import { useFormatting } from './TextFormatter'
 import styles from './TextArea.module.css'
 
 function TextArea({ text }) {

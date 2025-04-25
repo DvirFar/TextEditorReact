@@ -1,5 +1,5 @@
-import { useFormatting } from '../TextFormatter';
-import styles from '../StyleArea.module.css';
+import { useFormatting } from '../main_components/TextFormatter';
+import styles from './StyleArea.module.css';
 
 function StyleArea(props) {
     const { formatting, toggleFormat } = useFormatting();

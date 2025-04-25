@@ -16,9 +16,9 @@ function DeleteArea({ text, setText }) {
 
     return (
         <div>
-            <button onClick={deleteLastChar}>Delete Last Character</button>
-            <button onClick={deleteLastWord}>Delete Last Word</button>
-            <button onClick={deleteAllText}>Delete All Text</button>
+            <button onClick={deleteLastChar}>Delete Character</button>
+            <button onClick={deleteLastWord}>Delete Word</button>
+            <button onClick={deleteAllText}>Delete Text</button>
         </div>
     );
 }

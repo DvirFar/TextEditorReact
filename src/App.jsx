@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import TextArea from './components/main_components/TextArea'
 import EditArea from './components/main_components/EditArea'
-import { TextFormatterProvider } from './components/TextFormatter'
+import { TextFormatterProvider } from './components/main_components/TextFormatter'
 import './App.css'
 
 function App() {
