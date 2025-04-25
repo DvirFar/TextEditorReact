@@ -1,17 +1,8 @@
-import { useFormatting } from '../main_components/TextFormatter';
 import styles from './StyleArea.module.css';
 
-function StyleArea(props) {
-    const { formatting, toggleFormat } = useFormatting();
-
+function StyleArea({ formatting, onStyleChange }) {
     const handleStyleClick = (style) => {
-        // Add an alert to see what's happening when we click format buttons
-        alert(`Toggling ${style}. Current value: ${formatting[style]}`);
-        toggleFormat(style);
-        
-        if (props.onStyleChange) {
-            props.onStyleChange(style);
-        }
+        onStyleChange(style);
     };
 
     return (
@@ -40,7 +31,6 @@ function StyleArea(props) {
                     </button>
                 </div>
 
-                {/* Rest of the component remains the same */}
                 <div className={styles.styleGroup}>
                     <h4>Font Size</h4>
                     <button 
