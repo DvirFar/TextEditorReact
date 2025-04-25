@@ -1,5 +1,3 @@
-import styles from "./ReplaceArea.module.css"
-
 function ReplaceArea(props) {
 
     const replaceOnce = () => {
@@ -16,7 +14,7 @@ function ReplaceArea(props) {
         props.setText(props.text.replaceAll(src, dst));
     }
 
-    return <div className={styles.replaceArea}>
+    return <div className="replace-area">
         <form>
             <input type="text" id="find-string" name="find-string" placeholder="Find string" />
             <input type="text" id="replace-string" name="replace-string" placeholder="Replace with" />

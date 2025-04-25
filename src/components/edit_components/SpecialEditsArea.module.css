@@ -1,4 +1,5 @@
 .specials {
+    width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
