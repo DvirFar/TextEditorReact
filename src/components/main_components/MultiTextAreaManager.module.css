@@ -1,0 +1,24 @@
+.multiTextAreaContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .textAreaWrapper {
+    flex: 1;
+    min-width: 300px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: border-color 0.2s;
+  }
+  
+  .textAreaWrapper.active {
+    border-color: #646cff;
+    box-shadow: 0 0 8px rgba(100, 108, 255, 0.4);
+  }
+  
+  /* When we have more than 1 text area, make them smaller */
+  .multiTextAreaContainer:has(.textAreaWrapper:nth-child(2)) .textAreaWrapper {
+    max-width: calc(50% - 10px);
+  }
