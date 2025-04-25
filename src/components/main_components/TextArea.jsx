@@ -1,16 +1,8 @@
 import styles from './TextArea.module.css'
 
 function TextArea({ text, formatting }) {
-  // Apply the style directly in the JSX using inline styles
   return (
-    <div className={styles.textarea}>
-      {text ? (
-        // Apply formatting only to actual text
-        <div style={{
-  return (<div>
-      <div className='fileName'>
-        
-      </div>
+    <div>
       <div 
         className={styles.textarea} 
         style={{
@@ -28,31 +20,8 @@ function TextArea({ text, formatting }) {
           fontSize: formatting.fontSize === 'small' ? '0.8em' :
                    formatting.fontSize === 'large' ? '1.4em' : '1em',
           textAlign: formatting.alignment
-        }}>
-          {text}
-        </div>
-      ) : (
-        // Placeholder with default styling
-        <div style={{
-          fontWeight: 'normal',
-          fontStyle: 'normal',
-          textDecoration: 'none',
-          color: '#888',
-          fontFamily: 'system-ui, Avenir, Helvetica, Arial, sans-serif',
-          fontSize: '1em',
-          textAlign: 'left'
-        }}>
-          Type something...
-        </div>
-      )}
         }}
       >
-        {/* Include debugging information in the text area */}
-        <div style={{color: 'gray', fontSize: '0.8em', marginBottom: '10px', fontWeight: 'normal', fontStyle: 'normal', textDecoration: 'none'}}>
-          Bold: {formatting.bold ? 'ON' : 'OFF'}, 
-          Italic: {formatting.italic ? 'ON' : 'OFF'}, 
-          Underline: {formatting.underline ? 'ON' : 'OFF'}
-        </div>
         {text || "Type something..."}
       </div>
     </div>
