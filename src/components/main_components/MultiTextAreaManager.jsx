@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import TextArea from './TextArea';
 import styles from './MultiTextAreaManager.module.css';
 

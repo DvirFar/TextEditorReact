@@ -3,51 +3,15 @@ import SaveArea from './components/main_components/SaveArea'
 import TextArea from './components/main_components/TextArea'
 import EditArea from './components/main_components/EditArea'
 import MultiTextAreaManager from './components/main_components/MultiTextAreaManager'
+import { syncSingleAndMultiState, handleToggleFormat, handleKeyPress, handleUpdateText, 
+        handleUndo, handleAddTextArea, handleRemoveTextArea, handleSwitchTextArea } from './utils/mainFuncs'
 import { saveFileAs, openFile } from './utils/save'
 import './App.css'
 
 function App() {
   // Initial single text area state (preserving existing functionality)
   const [text, setText] = useState('')
-  const [history, setHistory] = useState([])
-  
-  // New states for multi-text functionality
-  const [texts, setTexts] = useState([text])
-  const [histories, setHistories] = useState([[]])
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [formattings, setFormattings] = useState([{
-    bold: false,
-    italic: false,
-    underline: false,
-    fontSize: 'medium',
-    fontFamily: 'default',
-    color: 'black',
-    alignment: 'left'
-  }])
-
-  // Function to keep the original text state in sync with multi-text state
-  const syncSingleAndMultiState = (newTexts, newHistories, newFormattings, newActiveIndex) => {
-    if (newTexts) {
-      setTexts(newTexts);
-      setText(newTexts[newActiveIndex !== undefined ? newActiveIndex : activeIndex]);
-    }
-    
-    if (newHistories) {
-      setHistories(newHistories);
-      setHistory(newHistories[newActiveIndex !== undefined ? newActiveIndex : activeIndex]);
-    }
-    
-    if (newFormattings) {
-      setFormattings(newFormattings);
-      setFormatting(newFormattings[newActiveIndex !== undefined ? newActiveIndex : activeIndex]);
-    }
-    
-    if (newActiveIndex !== undefined) {
-      setActiveIndex(newActiveIndex);
-    }
-  };
-
-  // New state for text formatting
+  const [_, setHistory] = useState([])
   const [formatting, setFormatting] = useState({
     bold: false,
     italic: false,
@@ -57,181 +21,45 @@ function App() {
     color: 'black',
     alignment: 'left'
   });
+  
+  // New states for multi-text functionality
+  const [texts, setTexts] = useState([text])
+  const [histories, setHistories] = useState([[]])
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [formattings, setFormattings] = useState([formatting])
 
-  // Function to toggle formatting options - extends existing function
   const toggleFormat = (formatType) => {
-    if (['bold', 'italic', 'underline'].includes(formatType)) {
-      // Update the original formatting state
-      setFormatting(prevState => ({
-        ...prevState,
-        [formatType]: !prevState[formatType]
-      }));
-      
-      // Update the formatting for the active text area
-      const newFormattings = [...formattings];
-      newFormattings[activeIndex] = {
-        ...newFormattings[activeIndex],
-        [formatType]: !newFormattings[activeIndex][formatType]
-      };
-      setFormattings(newFormattings);
-    } 
-    else if (['small', 'medium', 'large'].includes(formatType)) {
-      setFormatting(prev => ({
-        ...prev,
-        fontSize: formatType
-      }));
-      
-      const newFormattings = [...formattings];
-      newFormattings[activeIndex] = {
-        ...newFormattings[activeIndex],
-        fontSize: formatType
-      };
-      setFormattings(newFormattings);
-    } 
-    else if (['default', 'serif', 'sans-serif', 'monospace', 'cursive'].includes(formatType)) {
-      setFormatting(prev => ({
-        ...prev,
-        fontFamily: formatType
-      }));
-      
-      const newFormattings = [...formattings];
-      newFormattings[activeIndex] = {
-        ...newFormattings[activeIndex],
-        fontFamily: formatType
-      };
-      setFormattings(newFormattings);
-    } 
-    else if (['black', 'red', 'blue', 'green'].includes(formatType)) {
-      setFormatting(prev => ({
-        ...prev,
-        color: formatType
-      }));
-      
-      const newFormattings = [...formattings];
-      newFormattings[activeIndex] = {
-        ...newFormattings[activeIndex],
-        color: formatType
-      };
-      setFormattings(newFormattings);
-    } 
-    else if (['left', 'center', 'right'].includes(formatType)) {
-      setFormatting(prev => ({
-        ...prev,
-        alignment: formatType
-      }));
-      
-      const newFormattings = [...formattings];
-      newFormattings[activeIndex] = {
-        ...newFormattings[activeIndex],
-        alignment: formatType
-      };
-      setFormattings(newFormattings);
-    }
-  };
-
-  const handleKeyPress = (val) => {
-    // Update original state for backward compatibility
-    setHistory(prev => [...prev, text]);
-    setText(prevText => prevText + val);
-    
-    // Update the multi-text state
-    const newTexts = [...texts];
-    const newHistories = [...histories];
-    
-    // Save the current text in history
-    newHistories[activeIndex] = [...histories[activeIndex], texts[activeIndex]];
-    // Update the text
-    newTexts[activeIndex] = texts[activeIndex] + val;
-    
-    setTexts(newTexts);
-    setHistories(newHistories);
+    handleToggleFormat(formatType, setFormatting, formattings, setFormattings, activeIndex);
+  }
+  
+  const keyPress = (val) => {
+    handleKeyPress(val, text, setText, setHistory, texts, setTexts, histories, setHistories, activeIndex);
   }
   
   const updateText = (newText) => {
-    // Update original state for backward compatibility
-    setHistory(prev => [...prev, text]);
-    setText(newText);
-    
-    // Update the multi-text state
-    const newTexts = [...texts];
-    const newHistories = [...histories];
-    
-    // Save the current text in history
-    newHistories[activeIndex] = [...histories[activeIndex], texts[activeIndex]];
-    // Update the text
-    newTexts[activeIndex] = newText;
-    
-    setTexts(newTexts);
-    setHistories(newHistories);
-  };
-  
+    handleUpdateText(newText, text, setText, setHistory, texts, setTexts, histories, setHistories, activeIndex);
+  }
+
   const undo = () => {
-    if (history.length > 0) {
-      const previousText = history[history.length - 1];
-      setHistory(prev => prev.slice(0, -1));
-      setText(previousText);
-    }
-    
-    // Multi-text undo
-    if (histories[activeIndex] && histories[activeIndex].length > 0) {
-      const previousText = histories[activeIndex][histories[activeIndex].length - 1];
-      
-      const newTexts = [...texts];
-      const newHistories = [...histories];
-      
-      newTexts[activeIndex] = previousText;
-      newHistories[activeIndex] = newHistories[activeIndex].slice(0, -1);
-      
-      setTexts(newTexts);
-      setHistories(newHistories);
-    }
-  };
+    handleUndo(setText, setHistory, texts, setTexts, histories, setHistories, activeIndex);
+  }
 
-  // Functions for multi-text management
   const addTextArea = () => {
-    // Add a new text area with default settings
-    const newTexts = [...texts, ''];
-    const newHistories = [...histories, []];
-    const newFormattings = [...formattings, {
-      bold: false,
-      italic: false,
-      underline: false,
-      fontSize: 'medium',
-      fontFamily: 'default',
-      color: 'black',
-      alignment: 'left'
-    }];
-    
-    syncSingleAndMultiState(newTexts, newHistories, newFormattings, texts.length);
-  };
-
+    handleAddTextArea(texts, histories, formattings,
+      setText, setTexts, setHistory, setHistories, setFormatting, setFormattings, activeIndex, setActiveIndex
+    );
+  }
+  
   const removeTextArea = (index) => {
-    if (texts.length <= 1) return; // Don't remove the last text area
-    
-    const newTexts = texts.filter((_, i) => i !== index);
-    const newHistories = histories.filter((_, i) => i !== index);
-    const newFormattings = formattings.filter((_, i) => i !== index);
-    
-    // Adjust active index if necessary
-    let newActiveIndex = activeIndex;
-    if (index === activeIndex) {
-      newActiveIndex = Math.max(0, activeIndex - 1);
-    } else if (index < activeIndex) {
-      newActiveIndex = activeIndex - 1;
-    }
-    
-    syncSingleAndMultiState(newTexts, newHistories, newFormattings, newActiveIndex);
-  };
-
+    handleRemoveTextArea(index, texts, histories, formattings, activeIndex,
+     setText, setTexts, setHistory, setHistories, setFormatting, setFormattings, setActiveIndex
+    );
+  }
+  
   const switchTextArea = (index) => {
-    if (index === activeIndex || index >= texts.length) return;
-    
-    setActiveIndex(index);
-    setText(texts[index]);
-    setHistory(histories[index]);
-    setFormatting(formattings[index]);
-  };
-
+    handleSwitchTextArea(index, setText, setHistory, texts, histories, formattings, setFormatting, activeIndex, setActiveIndex);
+  }
+  
   const handleSave = (fileName) => {
     console.log("Saving...");
     
@@ -311,14 +139,14 @@ function App() {
           texts={texts}
           formattings={formattings}
           activeIndex={activeIndex}
-          onTextChange={switchTextArea}
+          onTextChange={(index) => switchTextArea(index)}
         />
       )}
       
       <EditArea 
         text={text} 
         setText={updateText} 
-        onKeyEvent={handleKeyPress}
+        onKeyEvent={keyPress}
         formatting={formatting}
         toggleFormat={toggleFormat}
         onUndo={undo}
