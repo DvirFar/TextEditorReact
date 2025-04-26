@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import SaveArea from './components/main_components/SaveArea'
-import TextArea from './components/main_components/TextArea'
-import EditArea from './components/main_components/EditArea'
-import MultiTextAreaManager from './components/main_components/MultiTextAreaManager'
+import SaveArea from './SaveArea'
+import TextArea from './TextArea'
+import EditArea from './EditArea'
+import MultiTextAreaManager from './MultiTextAreaManager'
 import { syncSingleAndMultiState, handleToggleFormat, handleKeyPress, handleUpdateText, 
-        handleUndo, handleAddTextArea, handleRemoveTextArea, handleSwitchTextArea } from './utils/mainFuncs'
-import { saveFileAs, openFile } from './utils/save'
-import './App.css'
+        handleUndo, handleAddTextArea, handleRemoveTextArea, handleSwitchTextArea } from '../../utils/mainFuncs'
+import { saveFileAs, openFile } from '../../utils/save'
+import '../../styles/App.css'
 
 function App() {
   // Initial single text area state (preserving existing functionality)
@@ -110,7 +110,9 @@ function App() {
         const newHistories = [[]];
         const newFormattings = [{ ...formatting }];
         
-        syncSingleAndMultiState(newTexts, newHistories, newFormattings, 0);
+        syncSingleAndMultiState(newTexts, newHistories, newFormattings, 0,
+          setText, setTexts, setHistory, setHistories, setFormatting, setFormattings, activeIndex, setActiveIndex
+        );
       }
       else alert("File not found");
     }

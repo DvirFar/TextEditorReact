@@ -1,6 +1,6 @@
-import DeleteArea from "./special_edit_section/DeleteArea";
-import SearchArea from "./special_edit_section/SearchArea";
-import ReplaceArea from "./special_edit_section/ReplaceArea";
+import DeleteArea from "./DeleteArea";
+import SearchArea from "./SearchArea";
+import ReplaceArea from "./ReplaceArea";
 import styles from "./SpecialEditsArea.module.css"
 
 function SpecialEditsArea(props) {

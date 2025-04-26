@@ -1,6 +1,6 @@
-import Key from "../../utils/primitives/Key";
-import { getKeyboardLayout } from "../../utils/primitives/keyboardTypes";
-import KeyClass from "../../utils/primitives/KeyClass";
+import Key from "../../../common/Key";
+import { getKeyboardLayout } from '../../../utils/keyboardTypes';
+import KeyClass from "../../../utils/KeyClass";
 import styles from "./Keyboard.module.css"
 
 function Keyboard(props) {

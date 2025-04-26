@@ -1,7 +1,7 @@
-import StyleArea from "../edit_components/StyleArea";
-import KeyboardArea from "../edit_components/KeyboardArea";
-import SpecialEditsArea from "../edit_components/SpecialEditsArea";
-import UndoArea from "../edit_components/UndoArea";
+import StyleArea from '../edit/Style/StyleArea'
+import KeyboardArea from "../edit/Keyboard/KeyboardArea";
+import SpecialEditsArea from "../edit/SpecialEdits/SpecialEditsArea";
+import UndoArea from "../edit/Undo/UndoArea";
 
 function EditArea(props) {
     const handleStyleChange = (styleType) => {

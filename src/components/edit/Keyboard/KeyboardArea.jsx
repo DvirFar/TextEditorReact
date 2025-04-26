@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Keyboard from "../edit_components/Keyboard";
+import Keyboard from "./Keyboard";
 
 function KeyboardArea(props) {
     const [keyboard, setKeyboard] = useState('EnglishSml')
