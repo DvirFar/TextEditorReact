@@ -1,4 +1,4 @@
-import Key from "../../../common/Key";
+import Key from '../../common/Key'
 import { getKeyboardLayout } from '../../../utils/keyboardTypes';
 import KeyClass from "../../../utils/KeyClass";
 import styles from "./Keyboard.module.css"
