@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './Login.module.css';
 
 function Login({ onLogin }) {
@@ -21,8 +21,8 @@ function Login({ onLogin }) {
     
     if (user) {
       // Save login status
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('currentUser', username);
+      sessionStorage.setItem('isLoggedIn', 'true');
+      sessionStorage.setItem('currentUser', username);
       onLogin(username);
     } else {
       // Check if this is the first login (no users yet)
@@ -47,7 +47,7 @@ function Login({ onLogin }) {
       return;
     }
     
-    const newUsers = [...users, { username, password }];
+    const newUsers = [...users, { username, password, "files": [] }];
     localStorage.setItem('users', JSON.stringify(newUsers));
     setError('');
     alert('Registration successful! You can now log in.');

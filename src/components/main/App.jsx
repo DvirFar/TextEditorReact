@@ -63,25 +63,27 @@ function App({ username, onLogout }) {
   
   const handleSave = (fileName) => {
     console.log("Saving...");
+    const userName = sessionStorage.getItem('CurrentUser');
     
     // For compatibility with existing code, save the active text
-    saveFileAs(fileName, text);
+    saveFileAs(userName, fileName, text);
     
     // Also save the multi-text state
     const multiTextState = {
       texts,
       formattings
     };
-    saveFileAs(`${fileName}_multi`, JSON.stringify(multiTextState));
+    saveFileAs(userName, `${fileName}_multi`, JSON.stringify(multiTextState));
     
     sessionStorage.setItem('CurrentFileName', fileName);
   }
 
   const handleOpen = (fileName) => {
     console.log("Opening", fileName);
+    const userName = sessionStorage.getItem('CurrentUser');
     
     // Try to open as multi-text first
-    const multiTextState = openFile(`${fileName}_multi`);
+    const multiTextState = openFile(userName, `${fileName}_multi`);
     
     if (multiTextState) {
       try {
@@ -96,13 +98,13 @@ function App({ username, onLogout }) {
       } catch (e) {
         console.error("Error parsing multi-text state:", e);
         // Fallback to single text file
-        const fileText = openFile(fileName);
+        const fileText = openFile(userName, fileName);
         if (fileText) setText(fileText);
         else alert("File not found");
       }
     } else {
       // Open as single text
-      const fileText = openFile(fileName);
+      const fileText = openFile(userName, fileName);
       if (fileText) {
         setText(fileText);
         

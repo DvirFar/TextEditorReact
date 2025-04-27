@@ -9,8 +9,8 @@ function AuthProvider() {
 
   useEffect(() => {
     // Check if user is already logged in
-    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const savedUsername = localStorage.getItem('currentUser');
+    const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+    const savedUsername = sessionStorage.getItem('currentUser');
     
     if (loggedIn && savedUsername) {
       setIsAuthenticated(true);
@@ -26,8 +26,8 @@ function AuthProvider() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('currentUser');
     setIsAuthenticated(false);
     setUsername('');
   };
