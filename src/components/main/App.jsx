@@ -3,12 +3,13 @@ import SaveArea from './SaveArea'
 import TextArea from './TextArea'
 import EditArea from './EditArea'
 import MultiTextAreaManager from './MultiTextAreaManager'
+import LogoutButton from '../auth/LogoutButton'
 import { syncSingleAndMultiState, handleToggleFormat, handleKeyPress, handleUpdateText, 
         handleUndo, handleAddTextArea, handleRemoveTextArea, handleSwitchTextArea } from '../../utils/mainFuncs'
 import { saveFileAs, openFile } from '../../utils/save'
 import '../../styles/App.css'
 
-function App() {
+function App({ username, onLogout }) {
   // Initial single text area state (preserving existing functionality)
   const [text, setText] = useState('')
   const [_, setHistory] = useState([])
@@ -120,6 +121,8 @@ function App() {
 
   return (
     <div className="app-container">
+      <LogoutButton username={username} onLogout={onLogout} />
+      
       <SaveArea 
         onSave={(fileName) => handleSave(fileName)} 
         onOpen={(fileName) => handleOpen(fileName)} 
