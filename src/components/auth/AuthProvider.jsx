@@ -1,28 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Login from './Login';
 import App from '../main/App';
 
 function AuthProvider() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState('');
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Check if user is already logged in
-    const loggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
-    const savedUsername = sessionStorage.getItem('currentUser');
-    
-    if (loggedIn && savedUsername) {
-      setIsAuthenticated(true);
-      setUsername(savedUsername);
-    }
-    
-    setLoading(false);
-  }, []);
+  // Initialize state directly from localStorage
+  const initialLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+  const initialUsername = sessionStorage.getItem('currentUser') || '';
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(initialLoggedIn);
+  const [username, setUsername] = useState(initialUsername);
 
   const handleLogin = (username) => {
     setIsAuthenticated(true);
     setUsername(username);
+    // Store in localStorage
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('currentUser', username);
   };
 
   const handleLogout = () => {
@@ -31,10 +24,6 @@ function AuthProvider() {
     setIsAuthenticated(false);
     setUsername('');
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   if (!isAuthenticated) {
     return <Login onLogin={handleLogin} />;
