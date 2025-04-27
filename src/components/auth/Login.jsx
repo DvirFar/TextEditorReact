@@ -16,22 +16,15 @@ function Login({ onLogin }) {
       return;
     }
     
-    // Check if user exists in localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(u => u.username === username && u.password === password);
+    let user = JSON.parse(localStorage.getItem(username) || '');
     
-    if (user) {
+    if (user?.password === password) {
       // Save login status
       sessionStorage.setItem('isLoggedIn', 'true');
       sessionStorage.setItem('currentUser', username);
       onLogin(username);
     } else {
-      // Check if this is the first login (no users yet)
-      if (users.length === 0) {
         setError('Invalid username or password');
-      } else {
-        setError('Invalid username or password');
-      }
     }
   };
 
@@ -41,15 +34,18 @@ function Login({ onLogin }) {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const userNameList = JSON.parse(localStorage.getItem('userNameList') || '[]');
     
-    if (users.some(u => u.username === username)) {
+    if (userNameList.includes(username)) {
       setError('Username already exists');
       return;
     }
+
+
     
-    const newUsers = [...users, { username, password, "files": [] }];
-    localStorage.setItem('users', JSON.stringify(newUsers));
+    const newUsers = [...userNameList, username];
+    localStorage.setItem('userNameList', JSON.stringify(newUsers));
+    localStorage.setItem(username, JSON.stringify({ password, files: {} }));
     setError('');
     alert('Registration successful! You can now log in.');
   };

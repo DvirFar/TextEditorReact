@@ -14,8 +14,8 @@ function AuthProvider() {
     setIsAuthenticated(true);
     setUsername(username);
     // Store in localStorage
-    localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem('currentUser', username);
+    sessionStorage.setItem('isLoggedIn', 'true');
+    sessionStorage.setItem('currentUser', username);
   };
 
   const handleLogout = () => {

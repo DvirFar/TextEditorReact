@@ -63,7 +63,7 @@ function App({ username, onLogout }) {
   
   const handleSave = (fileName) => {
     console.log("Saving...");
-    const userName = sessionStorage.getItem('CurrentUser');
+    const userName = sessionStorage.getItem('currentUser');
     
     // For compatibility with existing code, save the active text
     saveFileAs(userName, fileName, text);
@@ -80,7 +80,7 @@ function App({ username, onLogout }) {
 
   const handleOpen = (fileName) => {
     console.log("Opening", fileName);
-    const userName = sessionStorage.getItem('CurrentUser');
+    const userName = sessionStorage.getItem('currentUser');
     
     // Try to open as multi-text first
     const multiTextState = openFile(userName, `${fileName}_multi`);

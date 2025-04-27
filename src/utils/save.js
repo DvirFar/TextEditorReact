@@ -1,9 +1,13 @@
 
 
 function saveFileAs(userName, filename, content) {
-    const user = JSON.parse(localStorage.getItem(userName));
+    let user = JSON.parse(localStorage.getItem(userName));
 
-    user.files[filename] = content;
+    let userFiles = user.files;
+    console.log(userFiles);
+    
+    userFiles[filename] = content;
+    user = {...user, files: userFiles};
 
     localStorage.setItem(userName, JSON.stringify(user));
 }
