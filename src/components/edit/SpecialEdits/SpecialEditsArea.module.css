@@ -1,5 +1,7 @@
 .specials {
-    width: 30%;
+    width: 38%;
+    background-color: #333;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
