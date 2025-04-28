@@ -30,19 +30,19 @@ function App({ username, onLogout }) {
   const [formattings, setFormattings] = useState([formatting])
 
   const toggleFormat = (formatType) => {
-    handleToggleFormat(formatType, setFormatting, formattings, setFormattings, activeIndex);
+    handleToggleFormat(formatType, text, texts, setHistory, histories, setHistories, setFormatting, formattings, setFormattings, activeIndex);
   }
   
   const keyPress = (val) => {
-    handleKeyPress(val, text, setText, setHistory, texts, setTexts, histories, setHistories, activeIndex);
+    handleKeyPress(val, text, formatting, setText, setHistory, texts, setTexts, formattings, histories, setHistories, activeIndex);
   }
   
   const updateText = (newText) => {
-    handleUpdateText(newText, text, setText, setHistory, texts, setTexts, histories, setHistories, activeIndex);
+    handleUpdateText(newText, text, formatting, setText, setHistory, texts, setTexts, formattings, histories, setHistories, activeIndex);
   }
 
   const undo = () => {
-    handleUndo(setText, setHistory, texts, setTexts, histories, setHistories, activeIndex);
+    handleUndo(setText, setFormatting, setHistory, texts, setTexts, formattings, setFormattings, histories, setHistories, activeIndex);
   }
 
   const addTextArea = () => {
