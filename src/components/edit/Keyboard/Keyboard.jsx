@@ -66,7 +66,7 @@ function Keyboard(props) {
                     onKeyEvent={() => handleKeyEvent(new KeyClass('Space', true))}
                 />
                 <Key
-                    key={KeyClass.id}
+                    key={KeyClass.id++}
                     val="Enter"
                     onKeyEvent={() => handleKeyEvent(new KeyClass('Enter', true))}
                 />

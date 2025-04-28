@@ -24,5 +24,3 @@ function DeleteArea({ text, setText }) {
 }
 
 export default DeleteArea;
-
-// jkljfdk jkgfl djk jkgf jk
