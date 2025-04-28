@@ -6,7 +6,6 @@ import styles from "./SpecialEditsArea.module.css"
 function SpecialEditsArea(props) {
     return <div className={styles.specials} >
         <DeleteArea text={props.text} setText={props.setText} />
-        <SearchArea />
         <ReplaceArea text={props.text} setText={props.setText} />
     </div>
 }
