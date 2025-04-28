@@ -1,5 +1,4 @@
 import DeleteArea from "./DeleteArea";
-import SearchArea from "./SearchArea";
 import ReplaceArea from "./ReplaceArea";
 import styles from "./SpecialEditsArea.module.css"
 
